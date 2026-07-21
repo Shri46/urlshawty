@@ -16,6 +16,7 @@ const latestLink = document.querySelector("#latestLink");
 const copyLatest = document.querySelector("#copyLatest");
 const exportCsv = document.querySelector("#exportCsv");
 const importCsv = document.querySelector("#importCsv");
+const fileModeNotice = document.querySelector("#fileModeNotice");
 
 let links = loadLinks();
 let latestShortUrl = "";
@@ -255,4 +256,5 @@ importCsv.addEventListener("change", async () => {
 window.addEventListener("hashchange", handleHashRoute);
 
 renderLinks();
+fileModeNotice.hidden = window.location.protocol !== "file:";
 handleHashRoute();

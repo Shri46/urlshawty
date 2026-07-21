@@ -134,6 +134,16 @@ h1 {
   border-bottom: 1px solid var(--line);
 }
 
+.file-mode-notice {
+  background: #fff6d7;
+  border: 1px solid #ead995;
+  border-radius: 7px;
+  color: #665018;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+}
+
 label,
 .field span {
   color: #384459;
