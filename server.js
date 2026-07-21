@@ -31,7 +31,7 @@ const server = http.createServer((request, response) => {
   const url = new URL(request.url, `http://${request.headers.host}`);
   const pathname = decodeURIComponent(url.pathname);
 
-  if (pathname === "/" || pathname.startsWith("/s/")) {
+  if (pathname === "/" || /^\/s\/[a-z0-9-]+$/i.test(pathname)) {
     sendFile(response, path.join(ROOT, "index.html"));
     return;
   }

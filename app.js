@@ -64,7 +64,26 @@ function setMessage(message = "", isError = true) {
 }
 
 async function copyText(text, button) {
-  await navigator.clipboard.writeText(text);
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      throw new Error("Clipboard API not available");
+    }
+  } catch (err) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+    } catch (e) {
+      console.error("Fallback copy failed: ", e);
+    }
+    document.body.removeChild(textarea);
+  }
   const original = button.textContent;
   button.textContent = "Copied";
   window.setTimeout(() => {
