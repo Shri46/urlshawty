@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace" aria-label="URL shortener workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Short links</p>
+            <h1>URL Shortener</h1>
+          </div>
+          <div class="summary" aria-live="polite">
+            <span id="linkCount">0 links</span>
+            <span id="clickCount">0 visits</span>
+          </div>
+        </header>
+
+        <section class="creator" aria-label="Create a short URL">
+          <form id="shortenForm" novalidate>
+            <label for="longUrl">Destination URL</label>
+            <div class="url-row">
+              <input id="longUrl" name="longUrl" type="url" placeholder="https://example.com/very/long/link" autocomplete="url" required>
+              <button type="submit">Shorten</button>
+            </div>
+
+            <div class="options-row">
+              <label class="field">
+                <span>Custom alias</span>
+                <input id="customAlias" name="customAlias" type="text" placeholder="launch-page" maxlength="24" autocomplete="off">
+              </label>
+              <label class="field">
+                <span>Tag</span>
+                <input id="tagInput" name="tagInput" type="text" placeholder="campaign" maxlength="20" autocomplete="off">
+              </label>
+            </div>
+            <p id="formMessage" class="form-message" role="status"></p>
+          </form>
+        </section>
+
+        <section class="toolbar" aria-label="Manage links">
+          <div class="search-wrap">
+            <label for="searchLinks">Search</label>
+            <input id="searchLinks" type="search" placeholder="Find by URL, alias, or tag">
+          </div>
+          <div class="actions">
+            <button id="exportCsv" type="button" class="secondary">Export CSV</button>
+            <label class="secondary file-button" for="importCsv">Import CSV</label>
+            <input id="importCsv" type="file" accept=".csv,text/csv">
+          </div>
+        </section>
+
+        <section class="result-panel" aria-label="Latest shortened URL" hidden>
+          <p>Ready to share</p>
+          <div class="result-row">
+            <a id="latestLink" href="#" target="_blank" rel="noreferrer"></a>
+            <button id="copyLatest" type="button">Copy</button>
+          </div>
+        </section>
+
+        <section class="links-area" aria-label="Saved links">
+          <div id="emptyState" class="empty-state">
+            <h2>No links yet</h2>
+            <p>Create your first short link and it will appear here with copy, open, edit, and visit tracking controls.</p>
+          </div>
+          <div id="linksList" class="links-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="linkCardTemplate">
+      <article class="link-card">
+        <div class="card-main">
+          <div class="alias-line">
+            <a class="short-link" target="_blank" rel="noreferrer"></a>
+            <span class="tag"></span>
+          </div>
+          <a class="long-link" target="_blank" rel="noreferrer"></a>
+          <p class="meta"></p>
+        </div>
+        <div class="card-actions">
+          <button class="copy-btn" type="button" title="Copy short URL">Copy</button>
+          <button class="open-btn" type="button" title="Open destination">Open</button>
+          <button class="delete-btn" type="button" title="Delete link">Delete</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
